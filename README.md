@@ -1,4 +1,5 @@
-events
+Events
 ======
 
-Event, party, group trip planning and advertising application built on Meteor.
+Veranstaltungs-, Party-, Gruppenreisenplaner und -Sharing app. Auf Meteor gebaut.
+
