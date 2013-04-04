@@ -8,3 +8,7 @@ insecure
 preserve-inputs
 bootstrap
 font-awesome
+accounts-base
+accounts-ui
+accounts-facebook
+accounts-google
