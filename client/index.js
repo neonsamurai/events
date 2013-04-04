@@ -1,11 +1,11 @@
 Template.page.greeting = function () {
-  return "Welcome to cool events.";
+  return "Willkommen bei Events!.";
 };
 
 Template.page.events({
-  'click input' : function () {
+  'click .btn' : function () {
     // template data, if any, is available in 'this'
     if (typeof console !== 'undefined')
-      console.log("You pressed the button");
+      console.log("You pressed a button");
   }
 });
