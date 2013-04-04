@@ -1,2 +1,4 @@
 /* CSS declarations go here */
 body {margin-top: 80px}
+
+.events-img-stretch-width {max-width:100%}
