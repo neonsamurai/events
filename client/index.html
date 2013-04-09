@@ -6,7 +6,7 @@
   {{> page}}
 </body>
 
-<template name="page">
+<template name="navbar">
   <!-- Navbar start -->
   <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
@@ -19,21 +19,19 @@
           <a class="brand" href="#"><i class="icon-beer"></i> Events</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Event erstellen</a></li>
-              <li><a href="#about">Impressum</a></li>
-              <li><a href="#contact">Kontakt</a></li>
+              <li><a id="event_create" href="#eventCreateFormModal" data-toggle="modal"><i class="icon-plus-sign"></i> Event erstellen</a></li>
+              <li><a id="impressum_show" href="#about"><i class="icon-info-sign"></i> Impressum</a></li>
+              <li><a id="contact_show" href="#contact"><i class="icon-envelope"></i> Kontakt</a></li>
             </ul>
             <ul class="nav pull-right">
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Anmelden/Registrieren <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
+                  <li class="nav-header">Einloggen mit:</li>
+                  <li><a href="#"><i class="icon-facebook-sign"></i> Facebook</a></li>
+                  <li><a href="#"><i class="icon-google-plus-sign"></i> Google</a></li>
                   <li class="divider"></li>
-                  <li class="nav-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
+                  <li><a href="#">Konto erstellen</a></li>
             </ul>
               </li>
             </ul>
@@ -42,114 +40,166 @@
       </div>
     </div>
 <!-- Navbar end -->
-<div class="container">
+</template>
+
+<template name="event_create_form">
+  <!-- Modal -->
+  <div id="eventCreateFormModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Event erstellen</h3>
+    </div>
+    <div class="modal-body">
+      <form class="form-horizontal">
+        <div class="control-group">
+          <label class="control-label" for="inputTitle">Titel</label>
+          <div class="controls">
+            <input class="input-block-level" type="text" id="inputTitle" placeholder="Titel der Veranstaltung...">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputDescription">Beschreibung</label>
+          <div class="controls">
+            <textarea class="input-block-level" rows="5" id="inputDescription" placeholder="Ausführliche Beschreibung der Veranstaltung..."></textarea>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <label class="checkbox">
+              <input id="inputPublicToggle" type="checkbox"> Öffentliche Veranstaltung?
+            </label>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Abbrechen</button>
+      <button class="btn btn-primary">Event erstellen</button>
+    </div>
+  </div>
+</template>
+
+<template name="page">
+  {{>event_create_form}}
+  {{>navbar}}
 
       <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit">
-        <h1>Hello Welt! <i class="icon-beer icon-4x pull-right"></i></h1>
-        {{greeting}}
-        <input class="btn" type="button" value="Click" />
-        <p>Hier kannst du deine Partys, Veranstaltungen, Gruppenreisen oder jede mögliche andere Gruppenaktivität planen und teilen. Teile deine Erlebnisse mit allen anderen Gästen in unserem Fotostream.</p>
-        <p>Du möchtest lieber ungestört sein? Kein Problem! Erstelle einfach eine Invite-Only-Veranstaltung und Du hast nur geladene Gäste auf deiner Veranstaltung.</p>
-        <p><a href="#" class="btn btn-primary btn-large">Mehr erfahren &raquo;</a></p>
+      <div class="container">
+        <div class="hero-unit">
+          <h1>Hello Welt! <i class="icon-beer icon-4x pull-right"></i></h1>
+          {{greeting}}
+          <input class="btn" type="button" value="Click" />
+          <p>Hier kannst du deine Partys, Veranstaltungen, Gruppenreisen oder jede mögliche andere Gruppenaktivität planen und teilen. Teile deine Erlebnisse mit allen anderen Gästen in unserem Fotostream.</p>
+          <p>Du möchtest lieber ungestört sein? Kein Problem! Erstelle einfach eine Invite-Only-Veranstaltung und Du hast nur geladene Gäste auf deiner Veranstaltung.</p>
+          <p><a href="#" class="btn btn-primary btn-large">Mehr erfahren &raquo;</a></p>
+        </div>
       </div>
 
       <!-- Parties / Events go here -->
       <!-- Emmet src:
-      ul.thumbnails>li.span4*15>img.events-img-stretch-width[src=http://placekitten.com/300/200][alt="Cool kitten party!"]+h3{Kitten party!!}+p>strong{Wann: }+{12.12.2014, 20:00 CET}^p>strong{Wo: }+{Partymeile 23, 12345 Berlin}
+      ul.thumbnails>li.span4*12>div.thumbnail>a[href=#]>img.events-img-stretch-width[src=http://placekitten.com/800/600][alt="Cool kitten party!"]^h3{Kitten party!!}+p>strong{Wann: }+{12.12.2014, 20:00 CET}^p>strong{Wo: }+{Partymeile 23, 12345 Berlin}
        -->
-      <ul class="thumbnails">
-        <li class="span4">
-          <img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width">
-          <h3>Kitten party!!</h3>
-          <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-          <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-        </li>
-        <li class="span4">
-          <img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width">
-          <h3>Kitten party!!</h3>
-          <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-          <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-        </li>
-        <li class="span4">
-          <img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width">
-          <h3>Kitten party!!</h3>
-          <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-          <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-        </li>
-        <li class="span4">
-          <img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width">
-          <h3>Kitten party!!</h3>
-          <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-          <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-        </li>
-        <li class="span4">
-          <img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width">
-          <h3>Kitten party!!</h3>
-          <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-          <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-        </li>
-        <li class="span4">
-          <img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width">
-          <h3>Kitten party!!</h3>
-          <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-          <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-        </li>
-        <li class="span4">
-          <img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width">
-          <h3>Kitten party!!</h3>
-          <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-          <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-        </li>
-        <li class="span4">
-          <img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width">
-          <h3>Kitten party!!</h3>
-          <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-          <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-        </li>
-        <li class="span4">
-          <img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width">
-          <h3>Kitten party!!</h3>
-          <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-          <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-        </li>
-        <li class="span4">
-          <img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width">
-          <h3>Kitten party!!</h3>
-          <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-          <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-        </li>
-        <li class="span4">
-          <img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width">
-          <h3>Kitten party!!</h3>
-          <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-          <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-        </li>
-        <li class="span4">
-          <img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width">
-          <h3>Kitten party!!</h3>
-          <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-          <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-        </li>
-        <li class="span4">
-          <img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width">
-          <h3>Kitten party!!</h3>
-          <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-          <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-        </li>
-        <li class="span4">
-          <img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width">
-          <h3>Kitten party!!</h3>
-          <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-          <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-        </li>
-        <li class="span4">
-          <img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width">
-          <h3>Kitten party!!</h3>
-          <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-          <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-        </li>
-      </ul>
+      <div class="container">
+        <ul class="thumbnails">
+          <li class="span4">
+            <div class="thumbnail">
+              <a href="#"><img src="http://placekitten.com/800/1220" alt="Cool kitten party!" class="events-img-stretch-width"></a>
+              <h3>Kitten party!!</h3>
+              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
+              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
+            </div>
+          </li>
+          <li class="span4">
+            <div class="thumbnail">
+              <a href="#"><img src="http://placekitten.com/800/1000" alt="Cool kitten party!" class="events-img-stretch-width"></a>
+              <h3>Kitten party!!</h3>
+              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
+              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
+            </div>
+          </li>
+          <li class="span4">
+            <div class="thumbnail">
+              <a href="#"><img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width"></a>
+              <h3>Kitten party!!</h3>
+              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
+              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
+            </div>
+          </li>
+          <li class="span4">
+            <div class="thumbnail">
+              <a href="#"><img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width"></a>
+              <h3>Kitten party!!</h3>
+              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
+              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
+            </div>
+          </li>
+          <li class="span4">
+            <div class="thumbnail">
+              <a href="#"><img src="http://placekitten.com/800/900" alt="Cool kitten party!" class="events-img-stretch-width"></a>
+              <h3>Kitten party!!</h3>
+              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
+              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
+            </div>
+          </li>
+          <li class="span4">
+            <div class="thumbnail">
+              <a href="#"><img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width"></a>
+              <h3>Kitten party!!</h3>
+              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
+              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
+            </div>
+          </li>
+          <li class="span4">
+            <div class="thumbnail">
+              <a href="#"><img src="http://placekitten.com/800/1500" alt="Cool kitten party!" class="events-img-stretch-width"></a>
+              <h3>Kitten party!!</h3>
+              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
+              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
+            </div>
+          </li>
+          <li class="span4">
+            <div class="thumbnail">
+              <a href="#"><img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width"></a>
+              <h3>Kitten party!!</h3>
+              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
+              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
+            </div>
+          </li>
+          <li class="span4">
+            <div class="thumbnail">
+              <a href="#"><img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width"></a>
+              <h3>Kitten party!!</h3>
+              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
+              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
+            </div>
+          </li>
+          <li class="span4">
+            <div class="thumbnail">
+              <a href="#"><img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width"></a>
+              <h3>Kitten party!!</h3>
+              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
+              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
+            </div>
+          </li>
+          <li class="span4">
+            <div class="thumbnail">
+              <a href="#"><img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width"></a>
+              <h3>Kitten party!!</h3>
+              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
+              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
+            </div>
+          </li>
+          <li class="span4">
+            <div class="thumbnail">
+              <a href="#"><img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width"></a>
+              <h3>Kitten party!!</h3>
+              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
+              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
 
       <hr>
 
@@ -157,6 +207,5 @@
         <p>&copy; TheEventsCompany 2013</p>
       </footer>
 
-    </div> <!-- /container -->
 
 </template>

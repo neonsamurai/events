@@ -9,3 +9,11 @@ Template.page.events({
       console.log("You pressed a button");
   }
 });
+
+Template.navbar.events({
+  'click #event_create' : function () {
+    if (typeof console !== 'undefined')
+      console.log("You pressed the 'Event erstellen' button.");
+    Session.set('showEventCreate', true);
+  }
+});
