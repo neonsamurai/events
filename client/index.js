@@ -19,5 +19,8 @@ Template.navbar.events({
 });
 
 Template.event_create_form.rendered = function () {
-  $('#inputDateWhen').datetimepicker({format: 'dd-mm-yyyy hh:ii'});
+  $('#inputDateWhen').datetimepicker({
+    format: 'dd-mm-yyyy hh:ii',
+    language: 'de'
+  });
 };
