@@ -17,3 +17,7 @@ Template.navbar.events({
     Session.set('showEventCreate', true);
   }
 });
+
+Template.event_create_form.rendered = function () {
+  $('#inputDateWhen').datetimepicker({format: 'dd-mm-yyyy hh:ii'});
+};

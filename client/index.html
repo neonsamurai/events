@@ -54,13 +54,27 @@
         <div class="control-group">
           <label class="control-label" for="inputTitle">Titel</label>
           <div class="controls">
-            <input class="input-block-level" type="text" id="inputTitle" placeholder="Titel der Veranstaltung...">
+            <input class="input-block-level" type="text" id="inputTitle" placeholder="Titel der Veranstaltung..." />
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputDateWhen">Wann</label>
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on"><i class="icon-calendar"></i></span><input id="inputDateWhen" size="16" type="text" readonly class="form_datetime input-block-level">
+            </div>
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="inputDescription">Beschreibung</label>
           <div class="controls">
             <textarea class="input-block-level" rows="5" id="inputDescription" placeholder="Ausführliche Beschreibung der Veranstaltung..."></textarea>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputImage">Bild</label>
+          <div class="controls">
+            <input type="file" class="input-block-level">
           </div>
         </div>
         <div class="control-group">
@@ -86,12 +100,9 @@
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="container">
         <div class="hero-unit">
-          <h1>Hello Welt! <i class="icon-beer icon-4x pull-right"></i></h1>
-          {{greeting}}
-          <input class="btn" type="button" value="Click" />
+          <h1>Deine Events! <i class="icon-beer icon-4x pull-right"></i></h1>
           <p>Hier kannst du deine Partys, Veranstaltungen, Gruppenreisen oder jede mögliche andere Gruppenaktivität planen und teilen. Teile deine Erlebnisse mit allen anderen Gästen in unserem Fotostream.</p>
           <p>Du möchtest lieber ungestört sein? Kein Problem! Erstelle einfach eine Invite-Only-Veranstaltung und Du hast nur geladene Gäste auf deiner Veranstaltung.</p>
-          <p><a href="#" class="btn btn-primary btn-large">Mehr erfahren &raquo;</a></p>
         </div>
       </div>
 
