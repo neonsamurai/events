@@ -26,14 +26,18 @@
             </ul>
             <ul class="nav pull-right">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Anmelden/Registrieren <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li class="nav-header">Einloggen mit:</li>
-                  <li><a href="#"><i class="icon-facebook-sign"></i> Facebook</a></li>
-                  <li><a href="#"><i class="icon-google-plus-sign"></i> Google</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">Konto erstellen</a></li>
-            </ul>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  {{#if currentUser}}
+                    {{currentUser.profile.login}}
+                  {{else}}
+                    Anmelden/Registrieren
+                  {{/if}}
+                  <b class="caret"></b></a>
+                {{#if currentUser}}
+                  {{>user_loggedin}}
+                {{else}}
+                  {{>user_loggedout}}
+                {{/if}}
               </li>
             </ul>
           </div><!--/.nav-collapse -->
@@ -41,6 +45,35 @@
       </div>
     </div>
 <!-- Navbar end -->
+</template>
+
+<template name="user_loggedout">
+  <ul class="dropdown-menu">
+    {{#if loggingIn}}
+      <li><a href="">Anmelden...</a></li>
+    {{else}}
+      <li class="nav-header">Einloggen mit:</li>
+      <li id="login_facebook"><a href="#login_facebook"><i class="icon-facebook-sign"></i> Facebook</a></li>
+      <li id="login_google"><a href="#login_google"><i class="icon-google-plus-sign"></i> Google</a></li>
+      <li class="nav-header">Oder:</li>
+      <li>
+        <div style="margin-left:1em;margin-right: 1em;">
+          <form>
+            <fieldset>
+              <input id="form_email" type="text" placeholder="Email">
+              <input id="form_password" type="text" placeholder="Passwort">
+              <input id="form_submit" type="submit" value="Anmelden" class="btn btn-primary">
+            </fieldset>
+          </form>
+        </div>
+      </li>
+      <li id="create_user"><a href="#">Konto erstellen</a></li>
+    {{/if}}
+  </ul>
+</template>
+
+<template name="user_loggedin">
+
 </template>
 
 <template name="event_create_form">
