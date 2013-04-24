@@ -104,9 +104,9 @@
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label" for="inputImage">Bild</label>
+          <label class="control-label" for="inputAdress">Adresse</label>
           <div class="controls">
-            <input type="file" class="input-block-level">
+            <textarea class="input-block-level" rows="5" id="inputAdress" placeholder="Ort der Veranstaltung..."></textarea>
           </div>
         </div>
         <div class="control-group">
@@ -120,7 +120,7 @@
     </div>
     <div class="modal-footer">
       <button class="btn" data-dismiss="modal" aria-hidden="true">Abbrechen</button>
-      <button class="btn btn-primary">Event erstellen</button>
+      <button data-dismiss="modal" class="btn btn-primary save">Event erstellen</button>
     </div>
   </div>
 </template>

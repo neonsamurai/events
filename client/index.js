@@ -86,6 +86,34 @@ Template.user_loggedout.events({
  * This template is rendered when a users clicks the 'Event erstellen' button.
  */
 
+Template.event_create_form.events({
+  'click .btn-primary': function(event, template) {
+    console.log('EventCreateForm.submit...');
+    // get form data...
+    var title = template.find('#inputTitle').value;
+    var description = template.find('#inputDescription').value;
+    var when = template.find('#inputDateWhen').value;
+    var where = template.find('#inputAdress').value;
+    var publicToggle = template.find('#inputPublicToggle').checked;
+    console.log(title);
+    console.log(description);
+    console.log(when);
+    console.log(where);
+    console.log(publicToggle);
+    // prepare event object
+    var eventData = {
+      title: title,
+      description: description,
+      when: when,
+      where: where,
+      public: publicToggle
+    };
+    // invoke server method
+    console.log('Calling createEvent...');
+    Meteor.call('createEvent', eventData);
+  }
+});
+
 /**
  * This callback is called, when the template has been rendered and the DOM is
  * ready. It adds the date time picker control to the corresponding input field
