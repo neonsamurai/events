@@ -3,6 +3,7 @@
 </head>
 
 <body>
+  {{loginButtons}}
   {{> page}}
 </body>
 
@@ -25,14 +26,18 @@
             </ul>
             <ul class="nav pull-right">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Anmelden/Registrieren <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li class="nav-header">Einloggen mit:</li>
-                  <li><a href="#"><i class="icon-facebook-sign"></i> Facebook</a></li>
-                  <li><a href="#"><i class="icon-google-plus-sign"></i> Google</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">Konto erstellen</a></li>
-            </ul>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  {{#if currentUser}}
+                    {{currentUser.profile.login}}
+                  {{else}}
+                    Anmelden/Registrieren
+                  {{/if}}
+                  <b class="caret"></b></a>
+                {{#if currentUser}}
+                  {{>user_loggedin}}
+                {{else}}
+                  {{>user_loggedout}}
+                {{/if}}
               </li>
             </ul>
           </div><!--/.nav-collapse -->
@@ -40,6 +45,35 @@
       </div>
     </div>
 <!-- Navbar end -->
+</template>
+
+<template name="user_loggedout">
+  <ul class="dropdown-menu">
+    {{#if loggingIn}}
+      <li><a href="">Anmelden...</a></li>
+    {{else}}
+      <li class="nav-header">Einloggen mit:</li>
+      <li id="login_facebook"><a href="#login_facebook"><i class="icon-facebook-sign"></i> Facebook</a></li>
+      <li id="login_google"><a href="#login_google"><i class="icon-google-plus-sign"></i> Google</a></li>
+      <li class="nav-header">Oder:</li>
+      <li>
+        <div style="margin-left:1em;margin-right: 1em;">
+          <form>
+            <fieldset>
+              <input id="form_email" type="text" placeholder="Email">
+              <input id="form_password" type="text" placeholder="Passwort">
+              <input id="form_submit" type="submit" value="Anmelden" class="btn btn-primary">
+            </fieldset>
+          </form>
+        </div>
+      </li>
+      <li id="create_user"><a href="#">Konto erstellen</a></li>
+    {{/if}}
+  </ul>
+</template>
+
+<template name="user_loggedin">
+
 </template>
 
 <template name="event_create_form">
@@ -54,13 +88,25 @@
         <div class="control-group">
           <label class="control-label" for="inputTitle">Titel</label>
           <div class="controls">
-            <input class="input-block-level" type="text" id="inputTitle" placeholder="Titel der Veranstaltung...">
+            <input class="input-block-level" type="text" id="inputTitle" placeholder="Titel der Veranstaltung..." />
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputDateWhen">Wann</label>
+          <div class="controls">
+            <input id="inputDateWhen" type="text" readonly class="input-block-level" placeholder="TT/MM/YYYY HH:MM">
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="inputDescription">Beschreibung</label>
           <div class="controls">
             <textarea class="input-block-level" rows="5" id="inputDescription" placeholder="Ausführliche Beschreibung der Veranstaltung..."></textarea>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputAdress">Adresse</label>
+          <div class="controls">
+            <textarea class="input-block-level" rows="5" id="inputAdress" placeholder="Ort der Veranstaltung..."></textarea>
           </div>
         </div>
         <div class="control-group">
@@ -74,7 +120,7 @@
     </div>
     <div class="modal-footer">
       <button class="btn" data-dismiss="modal" aria-hidden="true">Abbrechen</button>
-      <button class="btn btn-primary">Event erstellen</button>
+      <button data-dismiss="modal" class="btn btn-primary save">Event erstellen</button>
     </div>
   </div>
 </template>
@@ -86,12 +132,9 @@
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="container">
         <div class="hero-unit">
-          <h1>Hello Welt! <i class="icon-beer icon-4x pull-right"></i></h1>
-          {{greeting}}
-          <input class="btn" type="button" value="Click" />
+          <h1>Deine Events! <i class="icon-beer icon-4x pull-right"></i></h1>
           <p>Hier kannst du deine Partys, Veranstaltungen, Gruppenreisen oder jede mögliche andere Gruppenaktivität planen und teilen. Teile deine Erlebnisse mit allen anderen Gästen in unserem Fotostream.</p>
           <p>Du möchtest lieber ungestört sein? Kein Problem! Erstelle einfach eine Invite-Only-Veranstaltung und Du hast nur geladene Gäste auf deiner Veranstaltung.</p>
-          <p><a href="#" class="btn btn-primary btn-large">Mehr erfahren &raquo;</a></p>
         </div>
       </div>
 
