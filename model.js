@@ -1,49 +1,45 @@
-Events = new Meteor.Collection("events");
-
-var street;
+Events = new Meteor.Collection("Events");
 
 Events.allow({
-	insert: function (userId, event){
-		return false;
-	},
-	update: function (userId, event, fields, modifier) {
-		if (userId !==event.owner) 
-			return false; // kein Besitzer
+  insert: function (userId, event){
+    return false;
+  },
+  update: function (userId, event, fields, modifier) {
+    if (userId !==event.owner)
+      return false; // kein Besitzer
 
-		var allowed = ["title", "decription", "street", "plz", "city"];
-		if (_.difference(fields, allowed).length)
-			return false; 
-		return true;
-	},
+    var allowed = ["title", "decription", "where", "when", "public"];
+    if (_.difference(fields, allowed).length)
+      return false;
+    return true;
+  },
 
-	remove: function(userId, event) {
-		// Events kann nur der Besitzer löschen
-		return event.owner === userId;
-	}
+  remove: function(userId, event) {
+    // Events kann nur der Besitzer löschen
+    return event.owner === userId;
+  }
 });
 
 attending = function(event) {
-	return (_.groupBy(event.rsvps, 'rsvp').yes || []).length;
+  return (_.groupBy(event.rsvps, 'rsvp').yes || []).length;
 };
 
 Meteor.methods({
-  createParty: function (options) {
+  createEvent: function (options) {
     options = options || {};
+    console.log(options);
     if (! (typeof options.title === "string" && options.title.length &&
            typeof options.description === "string" &&
            options.description.length &&
-           typeof options.street === "string" && options.street.length && 
-           typeof options.city === "string" && options.city.length &&  
-           typeof options.plz === "number" && options.plz >= 99999 && options.plz <= 01000))
+           typeof options.where === "string" && options.where.length &&
+           typeof options.when === "string" && options.when.length))
       throw new Meteor.Error(400, "Required parameter missing");
     if (options.title.length > 100)
       throw new Meteor.Error(413, "Title too long");
     if (options.description.length > 1000)
       throw new Meteor.Error(413, "Description too long");
-    if (options.street.length > 100)
-      throw new Meteor.Error(413, "Street too long");
-  	if (options.description.length > 30)
-      throw new Meteor.Error(413, "Description too long");
+    if (options.where.length > 1000)
+      throw new Meteor.Error(413, "Address too long.");
     if (! this.userId)
       throw new Meteor.Error(403, "You must be logged in");
 
@@ -51,11 +47,9 @@ Meteor.methods({
       owner: this.userId,
       title: options.title,
       description: options.description,
-      street: options.street,
-      city: options.city,
-      plz: options.plz,
-      description: options.description,
-      public: !! options.public,
+      where: options.where,
+      when: options.when,
+      public: options.publicToggle,
       invited: [],
       rsvps: []
     });
@@ -90,11 +84,11 @@ Meteor.methods({
   },
 
 // Users
-displayName = function (user) {
+displayName: function (user) {
   if (user.profile && user.profile.name)
     return user.profile.name;
   return user.emails[0].address;
-};
+}});
 
 var contactEmail = function (user) {
   if (user.emails && user.emails.length)
