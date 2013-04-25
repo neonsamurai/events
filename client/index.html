@@ -125,6 +125,23 @@
   </div>
 </template>
 
+<template name="eventlist">
+  <div class="container">
+        <ul class="thumbnails">
+          {{#each events}}
+            <li class="span4">
+            <div class="thumbnail">
+              <a href="#"><img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width"></a>
+              <h3>{{title}}</h3>
+              <p><strong>Wann: </strong>{{when}}</p>
+              <p><strong>Wo: </strong>{{where}}</p>
+            </div>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+</template>
+
 <template name="page">
   {{>event_create_form}}
   {{>navbar}}
@@ -137,111 +154,12 @@
           <p>Du möchtest lieber ungestört sein? Kein Problem! Erstelle einfach eine Invite-Only-Veranstaltung und Du hast nur geladene Gäste auf deiner Veranstaltung.</p>
         </div>
       </div>
-
+  {{>eventlist}}
       <!-- Parties / Events go here -->
       <!-- Emmet src:
       ul.thumbnails>li.span4*12>div.thumbnail>a[href=#]>img.events-img-stretch-width[src=http://placekitten.com/800/600][alt="Cool kitten party!"]^h3{Kitten party!!}+p>strong{Wann: }+{12.12.2014, 20:00 CET}^p>strong{Wo: }+{Partymeile 23, 12345 Berlin}
        -->
-      <div class="container">
-        <ul class="thumbnails">
-          <li class="span4">
-            <div class="thumbnail">
-              <a href="#"><img src="http://placekitten.com/800/1220" alt="Cool kitten party!" class="events-img-stretch-width"></a>
-              <h3>Kitten party!!</h3>
-              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-            </div>
-          </li>
-          <li class="span4">
-            <div class="thumbnail">
-              <a href="#"><img src="http://placekitten.com/800/1000" alt="Cool kitten party!" class="events-img-stretch-width"></a>
-              <h3>Kitten party!!</h3>
-              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-            </div>
-          </li>
-          <li class="span4">
-            <div class="thumbnail">
-              <a href="#"><img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width"></a>
-              <h3>Kitten party!!</h3>
-              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-            </div>
-          </li>
-          <li class="span4">
-            <div class="thumbnail">
-              <a href="#"><img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width"></a>
-              <h3>Kitten party!!</h3>
-              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-            </div>
-          </li>
-          <li class="span4">
-            <div class="thumbnail">
-              <a href="#"><img src="http://placekitten.com/800/900" alt="Cool kitten party!" class="events-img-stretch-width"></a>
-              <h3>Kitten party!!</h3>
-              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-            </div>
-          </li>
-          <li class="span4">
-            <div class="thumbnail">
-              <a href="#"><img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width"></a>
-              <h3>Kitten party!!</h3>
-              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-            </div>
-          </li>
-          <li class="span4">
-            <div class="thumbnail">
-              <a href="#"><img src="http://placekitten.com/800/1500" alt="Cool kitten party!" class="events-img-stretch-width"></a>
-              <h3>Kitten party!!</h3>
-              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-            </div>
-          </li>
-          <li class="span4">
-            <div class="thumbnail">
-              <a href="#"><img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width"></a>
-              <h3>Kitten party!!</h3>
-              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-            </div>
-          </li>
-          <li class="span4">
-            <div class="thumbnail">
-              <a href="#"><img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width"></a>
-              <h3>Kitten party!!</h3>
-              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-            </div>
-          </li>
-          <li class="span4">
-            <div class="thumbnail">
-              <a href="#"><img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width"></a>
-              <h3>Kitten party!!</h3>
-              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-            </div>
-          </li>
-          <li class="span4">
-            <div class="thumbnail">
-              <a href="#"><img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width"></a>
-              <h3>Kitten party!!</h3>
-              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-            </div>
-          </li>
-          <li class="span4">
-            <div class="thumbnail">
-              <a href="#"><img src="http://placekitten.com/800/600" alt="Cool kitten party!" class="events-img-stretch-width"></a>
-              <h3>Kitten party!!</h3>
-              <p><strong>Wann: </strong>12.12.2014, 20:00 CET</p>
-              <p><strong>Wo: </strong>Partymeile 23, 12345 Berlin</p>
-            </div>
-          </li>
-        </ul>
-      </div>
+
 
 
       <hr>

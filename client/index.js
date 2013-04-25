@@ -128,3 +128,21 @@ Template.event_create_form.rendered = function () {
 };
 // --- end template 'event_create_form' ----------------------------------------
 // -----------------------------------------------------------------------------
+
+/**
+ * Controllers for template 'eventlist'.
+ *
+ * This template is rendered on the landing page and shows all available events.
+ */
+
+/**
+ * Returns array of event objects. Currently sorted by MongoDB default setting.
+ *
+ * TODO: - Only show public events.
+ *       - Sort by 'upcoming': Nearest events first (from now).
+ *
+ * @return {Array} Array of all Events in the database.
+ */
+Template.eventlist.events = function () {
+  return Events.find().fetch();
+};
