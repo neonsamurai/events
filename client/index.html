@@ -3,7 +3,6 @@
 </head>
 
 <body>
-  {{loginButtons}}
   {{> page}}
 </body>
 
@@ -12,35 +11,31 @@
   <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="#"><i class="icon-beer"></i> Events</a>
-          <div class="nav-collapse collapse">
+          <span><a class="brand" href="#"><i class="icon-beer"></i> <span class="hidden-phone visible-tablet visible-desktop">Events</span></a></span>
             <ul class="nav">
-              <li><a id="event_create" href="#eventCreateFormModal" data-toggle="modal"><i class="icon-plus-sign"></i> Event erstellen</a></li>
-              <li><a id="impressum_show" href="#about"><i class="icon-info-sign"></i> Impressum</a></li>
-              <li><a id="contact_show" href="#contact"><i class="icon-envelope"></i> Kontakt</a></li>
+              <li>
+                <a id="event_create" href="#eventCreateFormModal" data-toggle="modal">
+                  <span><i class="icon-plus-sign"></i> <span class="hidden-phone visible-tablet visible-desktop">Event erstellen</span></span>
+                </a>
+              </li>
+              <li>
+                <a id="impressum_show" href="#about">
+                  <span><i class="icon-info-sign"></i> <span class="hidden-phone visible-tablet visible-desktop">Impressum</span></span>
+                </a>
+              </li>
+              <li>
+                <a id="contact_show" href="#contact">
+                  <span><i class="icon-envelope"></i> <span class="hidden-phone visible-tablet visible-desktop">Kontakt</span></span>
+                </a>
+              </li>
             </ul>
             <ul class="nav pull-right">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  {{#if currentUser}}
-                    {{currentUser.profile.login}}
-                  {{else}}
-                    Anmelden/Registrieren
-                  {{/if}}
-                  <b class="caret"></b></a>
-                {{#if currentUser}}
-                  {{>user_loggedin}}
-                {{else}}
-                  {{>user_loggedout}}
-                {{/if}}
+                <a href="#">
+                  <i class="icon-user"></i> {{loginButtons align="right"}}
+                </a>
               </li>
             </ul>
-          </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
