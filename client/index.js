@@ -126,5 +126,17 @@ Template.event_create_form.rendered = function () {
     language: 'de'
   });
 };
+
+Template.gmaps.rendered = function() {
+    var mapOptions = {
+    zoom: 4,
+    center: new google.maps.LatLng(-25.363882, 131.044922),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+};
+
 // --- end template 'event_create_form' ----------------------------------------
 // -----------------------------------------------------------------------------
