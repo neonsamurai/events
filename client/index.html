@@ -13,8 +13,16 @@
 <body>
 
   {{> page}}
+  {{> twitter}}
 
 </body>
+
+<template name="twitter">
+  {{#each stream}}
+  <p>{{this}}</p>
+  {{/each}}
+</template>
+
 
 <template name="navbar">
   <!-- Navbar start -->

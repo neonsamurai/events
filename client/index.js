@@ -109,6 +109,4 @@ Template.gmaps.rendered = function() {
     mapOptions);
     console.log(map);
   });
-
-
 };
