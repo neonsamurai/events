@@ -8,15 +8,14 @@
  * Generates a customised welcome message for each user on login.
  * @return {String} Welcome message
  */
-Template.page.greeting = function () {
-  return "Willkommen bei Events!.";
+Template.page.eventList = function() {
+  return Events.find().fetch();
 };
 
 Template.page.events({
-  'click .btn' : function () {
+  'click .btn': function() {
     // template data, if any, is available in 'this'
-    if (typeof console !== 'undefined')
-      console.log("You pressed a button");
+    if (typeof console !== 'undefined') console.log("You pressed a button");
   }
 });
 // --- end template 'page' ---------------------------------------------------
@@ -31,54 +30,13 @@ Template.page.events({
  * dropdowns for the user.
  */
 Template.navbar.events({
-  'click #event_create' : function () {
-    if (typeof console !== 'undefined')
-      console.log("You pressed the 'Event erstellen' button.");
+  'click #event_create': function() {
+    if (typeof console !== 'undefined') console.log("You pressed the 'Event erstellen' button.");
     Session.set('showEventCreate', true);
   }
 });
 // --- end template 'navbar' -------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-/**
- * Controllers for template 'user_loggedout'.
- *
- * This template renders the dropdown when the user is not logged in. It
- * contains the various login buttons, the login form and the registration
- * form.
- */
-
-/**
- * Event handlers for
- * - Facebook login
- * - Google login
- * - Login form for local account
- * - Registration button for local account
- */
-Template.user_loggedout.events({
-  'click #login_facebook' : function () {
-    console.log('Log in with Facebook');
-  },
-  'click #login_google' : function () {
-     console.log('Log in with Google');
-  },
-  'submit' : function (event, template) {
-    event.preventDefault();
-    var email = template.find('#form_email').value;
-    var password = template.find('#form_password').value;
-    console.log('Login with ' + email + ' / ' + password);
-    console.log(event);
-    console.log(template);
-  },
-  'click #create_user' : function () {
-    console.log('Create User...');
-  }
-});
-// --- end template 'user_loggedout' -----------------------------------------
-// ---------------------------------------------------------------------------
-
 
 
 /**
@@ -118,7 +76,8 @@ Template.event_create_form.events({
  * field in the form.
  * @return {none} nothing is returned.
  */
-Template.event_create_form.rendered = function () {
+Template.event_create_form.rendered = function() {
+  console.log('event form rendered');
   $('#inputDateWhen').datetimepicker({
     format: 'dd-mm-yyyy hh:ii',
     language: 'de'
@@ -128,12 +87,28 @@ Template.event_create_form.rendered = function () {
 // ---------------------------------------------------------------------------
 
 Template.gmaps.rendered = function() {
-    var mapOptions = {
-    zoom: 4,
-    center: new google.maps.LatLng(-25.363882, 131.044922),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
+  var geocoder = new google.maps.Geocoder();
+  var loc;
+  var mapOptions;
+  var map;
+  geocoder.geocode({
+    address: 'Luxemburger Straße 34, Berlin'
+  },
 
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
+  function(result, status) {
+    console.log(result[0].geometry.location);
+    console.log(status);
+    loc = result[0].geometry.location;
+    console.log(loc.lat());
+    mapOptions = {
+      zoom: 16,
+      center: new google.maps.LatLng(loc.lat(), loc.lng()),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById('map_canvas'),
+    mapOptions);
+    console.log(map);
+  });
+
+
 };
