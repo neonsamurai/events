@@ -8,7 +8,7 @@ Events.allow({
     if (userId !==event.owner)
       return false; // kein Besitzer
 
-    var allowed = ["title", "decription", "where", "when", "public"];
+    var allowed = ["title", "decription", "hashtag", "where", "when", "public"];
     if (_.difference(fields, allowed).length)
       return false;
     return true;
@@ -46,6 +46,7 @@ Meteor.methods({
     return Events.insert({
       owner: this.userId,
       title: options.title,
+      hashtag: options.hashtag,
       description: options.description,
       where: options.where,
       when: options.when,

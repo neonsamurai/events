@@ -19,8 +19,8 @@ Template.page.events({
       console.log("You pressed a button");
   }
 });
-// --- end template 'page' -----------------------------------------------------
-// -----------------------------------------------------------------------------
+// --- end template 'page' ---------------------------------------------------
+// ---------------------------------------------------------------------------
 
 
 
@@ -37,8 +37,8 @@ Template.navbar.events({
     Session.set('showEventCreate', true);
   }
 });
-// --- end template 'navbar' ---------------------------------------------------
-// -----------------------------------------------------------------------------
+// --- end template 'navbar' -------------------------------------------------
+// ---------------------------------------------------------------------------
 
 
 
@@ -46,7 +46,8 @@ Template.navbar.events({
  * Controllers for template 'user_loggedout'.
  *
  * This template renders the dropdown when the user is not logged in. It
- * contains the various login buttons, the login form and the registration form.
+ * contains the various login buttons, the login form and the registration
+ * form.
  */
 
 /**
@@ -75,8 +76,8 @@ Template.user_loggedout.events({
     console.log('Create User...');
   }
 });
-// --- end template 'user_loggedout' -------------------------------------------
-// -----------------------------------------------------------------------------
+// --- end template 'user_loggedout' -----------------------------------------
+// ---------------------------------------------------------------------------
 
 
 
@@ -93,18 +94,15 @@ Template.event_create_form.events({
     var title = template.find('#inputTitle').value;
     var description = template.find('#inputDescription').value;
     var when = template.find('#inputDateWhen').value;
+    var hashtag = template.find('#inputHashtag').value;
     var where = template.find('#inputAdress').value;
     var publicToggle = template.find('#inputPublicToggle').checked;
-    console.log(title);
-    console.log(description);
-    console.log(when);
-    console.log(where);
-    console.log(publicToggle);
     // prepare event object
     var eventData = {
       title: title,
       description: description,
       when: when,
+      hashtag: hashtag,
       where: where,
       public: publicToggle
     };
@@ -116,8 +114,8 @@ Template.event_create_form.events({
 
 /**
  * This callback is called, when the template has been rendered and the DOM is
- * ready. It adds the date time picker control to the corresponding input field
- * in the form.
+ * ready. It adds the date time picker control to the corresponding input
+ * field in the form.
  * @return {none} nothing is returned.
  */
 Template.event_create_form.rendered = function () {
@@ -126,5 +124,5 @@ Template.event_create_form.rendered = function () {
     language: 'de'
   });
 };
-// --- end template 'event_create_form' ----------------------------------------
-// -----------------------------------------------------------------------------
+// --- end template 'event_create_form' --------------------------------------
+// ---------------------------------------------------------------------------

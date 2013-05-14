@@ -11,7 +11,12 @@
   <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <span><a class="brand" href="#"><i class="icon-beer"></i> <span class="hidden-phone visible-tablet visible-desktop">Events</span></a></span>
+          <span>
+            <a class="brand" href="#">
+              <i class="icon-beer"></i>
+              <span class="hidden-phone visible-tablet visible-desktop">Events</span>
+            </a>
+          </span>
             <ul class="nav">
               <li>
                 <a id="event_create" href="#eventCreateFormModal" data-toggle="modal">
@@ -90,6 +95,12 @@
           <label class="control-label" for="inputDateWhen">Wann</label>
           <div class="controls">
             <input id="inputDateWhen" type="text" readonly class="input-block-level" placeholder="TT/MM/YYYY HH:MM">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputHashtag">Hashtag</label>
+          <div class="controls">
+            <input class="input-block-level" type="text" id="inputHashtag" placeholder="#..." />
           </div>
         </div>
         <div class="control-group">
