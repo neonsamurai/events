@@ -31,16 +31,22 @@
         <div class="container">
           <span>
             <a class="brand" href="#">
-              <i class="icon-beer"></i>
-              <span class="hidden-phone visible-tablet visible-desktop">Events</span>
+              <span>
+                <i class="icon-beer"></i>
+                <span class="hidden-phone visible-tablet visible-desktop">
+                  Events
+                </span>
+              </span>
             </a>
           </span>
             <ul class="nav">
+              {{#if loggedIn}}
               <li>
                 <a id="event_create" href="#eventCreateFormModal" data-toggle="modal">
                   <span><i class="icon-plus-sign"></i> <span class="hidden-phone visible-tablet visible-desktop">Event erstellen</span></span>
                 </a>
               </li>
+              {{/if}}
               <li>
                 <a id="impressum_show" href="#about">
                   <span><i class="icon-info-sign"></i> <span class="hidden-phone visible-tablet visible-desktop">Impressum</span></span>

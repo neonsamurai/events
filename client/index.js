@@ -29,6 +29,10 @@ Template.page.events({
  * Navbar is rendered on the top of the page. It contains all buttons and
  * dropdowns for the user.
  */
+Template.navbar.loggedIn = function() {
+  return Meteor.userId();
+};
+
 Template.navbar.events({
   'click #event_create': function() {
     if (typeof console !== 'undefined') console.log("You pressed the 'Event erstellen' button.");
