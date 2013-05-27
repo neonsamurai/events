@@ -17,13 +17,6 @@
 
 </body>
 
-<template name="twitter">
-  {{#each stream}}
-  <p>{{this}}</p>
-  {{/each}}
-</template>
-
-
 <template name="navbar">
   <!-- Navbar start -->
   <div class="navbar navbar-inverse navbar-fixed-top">
@@ -138,41 +131,45 @@
   {{>navbar}}
 
       <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="container">
-        <div class="hero-unit">
-          <h1>Deine Events! <i class="icon-beer icon-4x pull-right"></i></h1>
-          <p>Hier kannst du deine Partys, Veranstaltungen, Gruppenreisen oder
-            jede mögliche andere Gruppenaktivität planen und teilen. Teile
-            deine Erlebnisse mit allen anderen Gästen in unserem Fotostream.
-          </p>
-          <p>Du möchtest lieber ungestört sein? Kein Problem! Erstelle einfach
-           eine Invite-Only-Veranstaltung und Du hast nur geladene Gäste auf
-           deiner Veranstaltung.</p>
-        </div>
-      </div>
-        {{>gmaps}}
-
-      <!-- Parties / Events go here -->
-      <div class="container">
-        <ul class="thumbnails">
-          {{#each eventList}}
-          <li class="span4">
-            <div class="thumbnail">
-              <a href="#">
-                <img src="http://placekitten.com/800/1220"
-                alt="Cool kitten party!" class="events-img-stretch-width">
-              </a>
-              <h3>{{this.title}}</h3>
-              <p><strong>Wann: </strong>{{this.when}}</p>
-              <p><strong>Wo: </strong>{{this.where}}</p>
-            </div>
-          </li>
-          {{/each}}
-        </ul>
-      </div>
+      {{{yield}}}
       <hr>
       <footer>
         <p class="text-center">&copy; TheEventsCompany 2013</p>
       </footer>
+</template>
+
+<template name="eventsList">
+  <div class="container">
+    <div class="hero-unit">
+      <h1>Deine Events! <i class="icon-beer icon-4x pull-right"></i></h1>
+      <p>Hier kannst du deine Partys, Veranstaltungen, Gruppenreisen oder
+        jede mögliche andere Gruppenaktivität planen und teilen. Teile
+        deine Erlebnisse mit allen anderen Gästen in unserem Fotostream.
+      </p>
+      <p>Du möchtest lieber ungestört sein? Kein Problem! Erstelle einfach
+       eine Invite-Only-Veranstaltung und Du hast nur geladene Gäste auf
+       deiner Veranstaltung.</p>
+    </div>
+  </div>
+  {{>gmaps}}
+
+  <!-- Parties / Events go here -->
+  <div class="container">
+    <ul class="thumbnails">
+      {{#each eventList}}
+      <li class="span4">
+        <div class="thumbnail">
+          <a href="#">
+            <img src="http://placekitten.com/800/1220"
+            alt="Cool kitten party!" class="events-img-stretch-width">
+          </a>
+          <h3>{{this.title}}</h3>
+          <p><strong>Wann: </strong>{{this.when}}</p>
+          <p><strong>Wo: </strong>{{this.where}}</p>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
 </template>
 
