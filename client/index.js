@@ -90,6 +90,10 @@ Template.event_create_form.rendered = function() {
 // --- end template 'event_create_form' --------------------------------------
 // ---------------------------------------------------------------------------
 
+
+/**
+ * Test implementation for Google maps API
+ */
 Template.gmaps.rendered = function() {
   var geocoder = new google.maps.Geocoder();
   var loc;
@@ -114,3 +118,12 @@ Template.gmaps.rendered = function() {
     console.log(map);
   });
 };
+
+Meteor.pages({
+
+},
+{
+  defaults: {
+    layout: 'page'
+  }
+});
