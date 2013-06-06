@@ -12,17 +12,19 @@
 
 <body>
 
-  {{> page}}
-  {{> twitter}}
 
 </body>
 
-<template name="twitter">
-  {{#each stream}}
-  <p>{{this}}</p>
-  {{/each}}
+<template name="page">
+  {{>event_create_form}}
+  {{>navbar}}
+  <!-- Main hero unit for a primary marketing message or call to action -->
+  {{{yield}}}
+  <hr>
+  <footer>
+    <p class="text-center">&copy; TheEventsCompany 2013</p>
+  </footer>
 </template>
-
 
 <template name="navbar">
   <!-- Navbar start -->
@@ -30,7 +32,7 @@
       <div class="navbar-inner">
         <div class="container">
           <span>
-            <a class="brand" href="#">
+            <a class="brand" href="/#">
               <span>
                 <i class="icon-beer"></i>
                 <span class="hidden-phone visible-tablet visible-desktop">
@@ -69,12 +71,6 @@
       </div>
     </div>
 <!-- Navbar end -->
-</template>
-
-<template name="gmaps">
-  {{#constant}}
-  <div id="map_canvas" style="width:100%; height:300px"></div>
-  {{/constant}}
 </template>
 
 <template name="event_create_form">
@@ -132,47 +128,37 @@
   </div>
 </template>
 
+<template name="eventsList">
+  <div class="container">
+    <div class="hero-unit">
+      <h1>Deine Events! <i class="icon-beer icon-4x pull-right"></i></h1>
+      <p>Hier kannst du deine Partys, Veranstaltungen, Gruppenreisen oder
+        jede mögliche andere Gruppenaktivität planen und teilen. Teile
+        deine Erlebnisse mit allen anderen Gästen in unserem Fotostream.
+      </p>
+      <p>Du möchtest lieber ungestört sein? Kein Problem! Erstelle einfach
+       eine Invite-Only-Veranstaltung und Du hast nur geladene Gäste auf
+       deiner Veranstaltung.</p>
+    </div>
+  </div>
 
-<template name="page">
-  {{>event_create_form}}
-  {{>navbar}}
-
-      <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="container">
-        <div class="hero-unit">
-          <h1>Deine Events! <i class="icon-beer icon-4x pull-right"></i></h1>
-          <p>Hier kannst du deine Partys, Veranstaltungen, Gruppenreisen oder
-            jede mögliche andere Gruppenaktivität planen und teilen. Teile
-            deine Erlebnisse mit allen anderen Gästen in unserem Fotostream.
-          </p>
-          <p>Du möchtest lieber ungestört sein? Kein Problem! Erstelle einfach
-           eine Invite-Only-Veranstaltung und Du hast nur geladene Gäste auf
-           deiner Veranstaltung.</p>
+  <!-- Parties / Events go here -->
+  <div class="container">
+    <ul class="thumbnails">
+      {{#each eventList}}
+      <li class="span4">
+        <div class="thumbnail">
+          <a href="/events/{{this._id}}">
+            <img src="http://placekitten.com/800/1220"
+            alt="Cool kitten party!" class="events-img-stretch-width">
+          </a>
+          <h3>{{this.title}}</h3>
+          <p><strong>Wann: </strong>{{this.when}}</p>
+          <p><strong>Wo: </strong>{{this.where}}</p>
         </div>
-      </div>
-        {{>gmaps}}
-
-      <!-- Parties / Events go here -->
-      <div class="container">
-        <ul class="thumbnails">
-          {{#each eventList}}
-          <li class="span4">
-            <div class="thumbnail">
-              <a href="#">
-                <img src="http://placekitten.com/800/1220"
-                alt="Cool kitten party!" class="events-img-stretch-width">
-              </a>
-              <h3>{{this.title}}</h3>
-              <p><strong>Wann: </strong>{{this.when}}</p>
-              <p><strong>Wo: </strong>{{this.where}}</p>
-            </div>
-          </li>
-          {{/each}}
-        </ul>
-      </div>
-      <hr>
-      <footer>
-        <p class="text-center">&copy; TheEventsCompany 2013</p>
-      </footer>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
 </template>
 

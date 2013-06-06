@@ -1,24 +1,17 @@
 /**
- * Controllers for template 'page'.
+ * Controllers for template 'eventsList'.
  *
- * This is the global template which is parent to all other templates.
  */
 
 /**
- * Generates a customised welcome message for each user on login.
- * @return {String} Welcome message
+ * Gets all Event objects for display in the list view.
+ * @return {Array} Array of Event objects
  */
-Template.page.eventList = function() {
+Template.eventsList.eventList = function() {
   return Events.find().fetch();
 };
 
-Template.page.events({
-  'click .btn': function() {
-    // template data, if any, is available in 'this'
-    if (typeof console !== 'undefined') console.log("You pressed a button");
-  }
-});
-// --- end template 'page' ---------------------------------------------------
+// --- end template 'eventsList' ---------------------------------------------
 // ---------------------------------------------------------------------------
 
 
@@ -35,7 +28,9 @@ Template.navbar.loggedIn = function() {
 
 Template.navbar.events({
   'click #event_create': function() {
-    if (typeof console !== 'undefined') console.log("You pressed the 'Event erstellen' button.");
+    if (typeof console !== 'undefined') {
+      console.log("You pressed the 'Event erstellen' button.");
+    }
     Session.set('showEventCreate', true);
   }
 });
@@ -90,27 +85,4 @@ Template.event_create_form.rendered = function() {
 // --- end template 'event_create_form' --------------------------------------
 // ---------------------------------------------------------------------------
 
-Template.gmaps.rendered = function() {
-  var geocoder = new google.maps.Geocoder();
-  var loc;
-  var mapOptions;
-  var map;
-  geocoder.geocode({
-    address: 'Luxemburger Straße 34, Berlin'
-  },
 
-  function(result, status) {
-    console.log(result[0].geometry.location);
-    console.log(status);
-    loc = result[0].geometry.location;
-    console.log(loc.lat());
-    mapOptions = {
-      zoom: 16,
-      center: new google.maps.LatLng(loc.lat(), loc.lng()),
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    map = new google.maps.Map(document.getElementById('map_canvas'),
-    mapOptions);
-    console.log(map);
-  });
-};
