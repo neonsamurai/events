@@ -8,7 +8,15 @@ Events.allow({
     if (userId !==event.owner)
       return false; // kein Besitzer
 
-    var allowed = ["title", "decription", "hashtag", "where", "when", "public"];
+    var allowed = [
+      "title",
+      "decription",
+      "hashtag",
+      "where",
+      "when",
+      "public",
+      "rsvps"
+      ];
     if (_.difference(fields, allowed).length)
       return false;
     return true;
@@ -19,10 +27,6 @@ Events.allow({
     return event.owner === userId;
   }
 });
-
-attending = function(event) {
-  return (_.groupBy(event.rsvps, 'rsvp').yes || []).length;
-};
 
 Meteor.methods({
   createEvent: function (options) {
@@ -44,7 +48,7 @@ Meteor.methods({
       throw new Meteor.Error(403, "You must be logged in");
 
     return Events.insert({
-      owner: this.userId,
+      owner: Meteor.user(),
       title: options.title,
       hashtag: options.hashtag,
       description: options.description,
@@ -52,8 +56,12 @@ Meteor.methods({
       when: options.when,
       public: options.publicToggle,
       invited: [],
-      rsvps: []
+      rsvps: [Meteor.user()]
     });
+  },
+
+  attend: function (eventId) {
+    return Events.update({_id: eventId},{$push: {rsvps: Meteor.user()}});
   },
 
   invite: function (eventId, userId) {

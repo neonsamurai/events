@@ -12,10 +12,19 @@
 
 <body>
 
-  {{> page}}
-  {{> twitter}}
 
 </body>
+
+<template name="page">
+  {{>event_create_form}}
+  {{>navbar}}
+  <!-- Main hero unit for a primary marketing message or call to action -->
+  {{{yield}}}
+  <hr>
+  <footer>
+    <p class="text-center">&copy; TheEventsCompany 2013</p>
+  </footer>
+</template>
 
 <template name="navbar">
   <!-- Navbar start -->
@@ -23,7 +32,7 @@
       <div class="navbar-inner">
         <div class="container">
           <span>
-            <a class="brand" href="#">
+            <a class="brand" href="/#">
               <span>
                 <i class="icon-beer"></i>
                 <span class="hidden-phone visible-tablet visible-desktop">
@@ -62,12 +71,6 @@
       </div>
     </div>
 <!-- Navbar end -->
-</template>
-
-<template name="gmaps">
-  {{#constant}}
-  <div id="map_canvas" style="width:100%; height:300px"></div>
-  {{/constant}}
 </template>
 
 <template name="event_create_form">
@@ -125,19 +128,6 @@
   </div>
 </template>
 
-
-<template name="page">
-  {{>event_create_form}}
-  {{>navbar}}
-
-      <!-- Main hero unit for a primary marketing message or call to action -->
-      {{{yield}}}
-      <hr>
-      <footer>
-        <p class="text-center">&copy; TheEventsCompany 2013</p>
-      </footer>
-</template>
-
 <template name="eventsList">
   <div class="container">
     <div class="hero-unit">
@@ -151,7 +141,6 @@
        deiner Veranstaltung.</p>
     </div>
   </div>
-  {{>gmaps}}
 
   <!-- Parties / Events go here -->
   <div class="container">
@@ -159,7 +148,7 @@
       {{#each eventList}}
       <li class="span4">
         <div class="thumbnail">
-          <a href="#">
+          <a href="/events/{{this._id}}">
             <img src="http://placekitten.com/800/1220"
             alt="Cool kitten party!" class="events-img-stretch-width">
           </a>
