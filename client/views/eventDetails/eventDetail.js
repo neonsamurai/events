@@ -1,15 +1,17 @@
-
+/**
+ * Publishes selected Event object in the Session object for access by other
+ * template helpers.
+ * @return {Object} Selected event object.
+ */
 Template.eventDetails.event = function () {
-  console.log(Session.get('event'));
   return Session.get('event');
 };
 
 /**
- * Test implementation for Google maps API
+ * Google maps configuration.
  */
 Template.gmaps.rendered = function() {
   var event = Session.get('event');
-  console.log(event.where);
   var geocoder = new google.maps.Geocoder();
   var loc;
   var mapOptions;
@@ -17,7 +19,13 @@ Template.gmaps.rendered = function() {
   geocoder.geocode({
     address: event.where
   },
-
+  /**
+   * Geocoder callback to invoke map configuration. See
+   * http://goo.gl/rTLmJ for details
+   *
+   * @param  {Object} result Geocoder result object.
+   * @param  {String} status Return status code from Geocoding.
+   */
   function(result, status) {
     loc = result[0].geometry.location;
     mapOptions = {
