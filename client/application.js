@@ -6,7 +6,6 @@
  */
 setEvent = function(context) {
   var _id = context.params.event_id;
-  console.log(context);
   Session.set("event", Events.findOne(_id));
 };
 
@@ -16,7 +15,7 @@ setEvent = function(context) {
  * 'route': 'template' | {config}
  *
  *  - to: 'template to use'
- *  - before 'functions to invoke before routing'
+ *  - before: 'functions to invoke before routing'
  */
 Meteor.pages({
   '/': 'eventsList',

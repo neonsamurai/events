@@ -7,6 +7,10 @@ Template.eventDetails.event = function () {
   return Session.get('event');
 };
 
+Template.event_edit_form.event = function() {
+  return Session.get('event');
+};
+
 /**
  * Google maps configuration.
  */

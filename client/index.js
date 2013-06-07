@@ -28,9 +28,6 @@ Template.navbar.loggedIn = function() {
 
 Template.navbar.events({
   'click #event_create': function() {
-    if (typeof console !== 'undefined') {
-      console.log("You pressed the 'Event erstellen' button.");
-    }
     Session.set('showEventCreate', true);
   }
 });
@@ -46,7 +43,6 @@ Template.navbar.events({
 
 Template.event_create_form.events({
   'click .btn-primary': function(event, template) {
-    console.log('EventCreateForm.submit...');
     // get form data...
     var title = template.find('#inputTitle').value;
     var description = template.find('#inputDescription').value;
@@ -63,20 +59,18 @@ Template.event_create_form.events({
       where: where,
       public: publicToggle
     };
-    // invoke server method
-    console.log('Calling createEvent...');
+    // invoke server create event method
     Meteor.call('createEvent', eventData);
   }
 });
 
 /**
- * This callback is called, when the template has been rendered and the DOM is
+ * This callback is fired, when the template has been rendered and the DOM is
  * ready. It adds the date time picker control to the corresponding input
  * field in the form.
  * @return {none} nothing is returned.
  */
 Template.event_create_form.rendered = function() {
-  console.log('event form rendered');
   $('#inputDateWhen').datetimepicker({
     format: 'dd-mm-yyyy hh:ii',
     language: 'de'
