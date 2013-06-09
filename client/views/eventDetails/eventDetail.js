@@ -3,13 +3,39 @@
  * template helpers.
  * @return {Object} Selected event object.
  */
-Template.eventDetails.event = function () {
+Template.eventDetails.event = function() {
   return Session.get('event');
 };
 
-Template.event_edit_form.event = function() {
+Template.event_edit_form.selectedEvent = function() {
   return Session.get('event');
 };
+
+Template.event_edit_form.events({
+  'click .btn-primary': function(event, template) {
+    var thisEvent = Session.get('event');
+    // get form data...
+    var title = template.find('#inputEditTitle').value;
+    var description = template.find('#inputEditDescription').value;
+    var when = template.find('#inputEditDateWhen').value;
+    var hashtag = template.find('#inputEditHashtag').value;
+    var where = template.find('#inputEditAdress').value;
+    var publicToggle = template.find('#inputEditPublicToggle').checked;
+    // prepare event object
+    var eventData = {
+      title: title,
+      description: description,
+      when: when,
+      hashtag: hashtag,
+      where: where,
+      public: publicToggle
+    };
+    // invoke server create event method
+    Events.update(thisEvent._id, {
+      $set: eventData
+    });
+  }
+});
 
 /**
  * Google maps configuration.
@@ -29,8 +55,7 @@ Template.gmaps.rendered = function() {
    *
    * @param  {Object} result Geocoder result object.
    * @param  {String} status Return status code from Geocoding.
-   */
-  function(result, status) {
+   */function(result, status) {
     loc = result[0].geometry.location;
     mapOptions = {
       zoom: 16,
@@ -39,13 +64,11 @@ Template.gmaps.rendered = function() {
     };
     map = new google.maps.Map(
       document.getElementById('map_canvas'),
-      mapOptions
-      );
+      mapOptions);
     marker = new google.maps.Marker({
       position: mapOptions.center,
       map: map,
       title: event.title
-  });
+    });
   });
 };
-

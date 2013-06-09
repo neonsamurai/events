@@ -43,6 +43,7 @@ Template.navbar.events({
 
 Template.event_create_form.events({
   'click .btn-primary': function(event, template) {
+    console.log(template);
     // get form data...
     var title = template.find('#inputTitle').value;
     var description = template.find('#inputDescription').value;
