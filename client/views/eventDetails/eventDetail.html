@@ -104,3 +104,21 @@
   </div>
   {{/with}}
 </template>
+
+<template name="eventInviteForm">
+  <div class="pull-right">
+    <form>
+      <fieldset>
+        <legend>Einladungen</legend>
+        <input type="text" placeholder="Emailadressen eintragen…">
+        <span class="help-block">Emailadressen mit Komma trennen.</span>
+        <button type="submit" class="btn">Einladungen versenden</button>
+      </fieldset>
+    </form>
+    <ul>
+      {{#each invitations}}
+      <li>{{this}} <i id="{{this}}" class="icon-remove"></i></li>
+      {{/each}}
+    </ul>
+  </div>
+</template>
