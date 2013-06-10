@@ -11,6 +11,26 @@ Template.event_edit_form.selectedEvent = function() {
   return Session.get('event');
 };
 
+Template.rsvpWidget.attending = function() {
+  var selectedEvent = Session.get('event');
+  var attending = false;
+  _.each(selectedEvent.rsvps, function(rsvp){
+    if(rsvp._id === Meteor.user()._id) {
+      attending = true;
+    }
+  });
+  return attending;
+};
+
+Template.rsvpWidget.events({
+  'click #attend': function (){
+    Meteor.call('attend', Session.get('event')._id);
+  },
+  'click #unattend': function (){
+    Meteor.call('unattend', Session.get('event')._id);
+  }
+});
+
 Template.event_edit_form.events({
   'click .btn-primary': function(event, template) {
     var thisEvent = Session.get('event');

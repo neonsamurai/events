@@ -2,6 +2,7 @@
 	{{>event_edit_form}}
 	<div class="container">
 		<a id="event_edit" href="#eventEditFormModal" data-toggle="modal" class="btn btn-primary">Event bearbeiten</a>
+    {{>rsvpWidget}}
 		{{#with event}}
 			<p>{{_id}}</p>
 			<h1>{{title}}</h1>
@@ -121,4 +122,18 @@
       {{/each}}
     </ul>
   </div>
+</template>
+
+<template name="rsvpWidget">
+  {{#if attending}}
+  <div>
+    <div class="alert alert-success">Du bist dabei!</div>
+    <button id="unattend" class="btn btn-block btn-large btn-danger">Absagen</button>
+  </div>
+  {{else}}
+  <div>
+    <div class="alert alert-warn">Du bist nicht dabei. Teilnehmen?</div>
+    <button id="attend" class="btn btn-block btn-large btn-primary">Teilnehmen</button>
+  </div>
+  {{/if}}
 </template>
