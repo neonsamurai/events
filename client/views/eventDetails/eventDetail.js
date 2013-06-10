@@ -31,6 +31,13 @@ Template.rsvpWidget.events({
   }
 });
 
+Template.eventInviteForm.events({
+  'click, submit .save': function(event, template){
+    event.preventDefault();
+    console.log(template.find('#inputInvitees').value);
+  }
+});
+
 Template.event_edit_form.events({
   'click .btn-primary': function(event, template) {
     var thisEvent = Session.get('event');
