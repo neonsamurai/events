@@ -118,6 +118,14 @@ Meteor.methods({
     });
   },
 
+  unattend: function(eventId) {
+    return Events.update({
+      _id: eventId
+    }, {
+      $pull: {rsvps: {_id: {$in: [Meteor.user()._id]}}}
+    });
+  },
+
   invite: function(eventId, userId) {
     var event = Events.findOne(eventId);
     if (!event || event.owner !== this.userId)
