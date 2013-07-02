@@ -62,6 +62,7 @@ Template.event_create_form.events({
     };
     // invoke server create event method
     Meteor.call('createEvent', eventData);
+    template.find('#eventCreateForm').reset();
   }
 });
 
