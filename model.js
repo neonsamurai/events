@@ -126,33 +126,32 @@ Meteor.methods({
     });
   },
 
-  invite: function(eventId, userId) {
+  invite: function(eventId, userId, invitee) {
     var event = Events.findOne(eventId);
-    if (!event || event.owner !== this.userId)
+    if (!event || event.owner._id !== userId)
       throw new Meteor.Error(404, "No such event");
     if (event.public)
       throw new Meteor.Error(400,
         "That event is public. No need to invite people.");
-    if (userId !== event.owner && !_.contains(event.invited, userId)) {
+    if (userId == event.owner._id && !_.contains(event.invited, invitee)) {
       Events.update(eventId, {
         $addToSet: {
-          invited: userId
+          invited: invitee
         }
       });
+    }
+  },
 
-      var from = contactEmail(Meteor.users.findOne(this.userId));
-      var to = contactEmail(Meteor.users.findOne(userId));
-      if (Meteor.isServer && to) {
-        // This code only runs on the server. If you didn't want clients
-        // to be able to see it, you could move it to a separate file.
-        Email.send({
-          from: "noreply@example.com",
-          to: to,
-          replyTo: from || undefined,
-          subject: "EVENT: " + event.title,
-          text: "Hey, I just invited you to '" + event.title + "' Events" + "\n\nCome check it out: " + Meteor.absoluteUrl() + "\n"
-        });
-      }
+  uninvite: function (eventId, userId, invitee) {
+    var event = Events.findOne(eventId);
+    if (userId == event.owner._id && _.contains(event.invited, invitee)) {
+      Events.update({
+        _id: eventId
+      }, {
+        $pull: {
+          invited: invitee
+        }
+      });
     }
   },
 

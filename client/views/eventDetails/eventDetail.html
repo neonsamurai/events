@@ -3,6 +3,7 @@
 	<div class="container">
 		{{#with event}}
 			{{>gmaps}}
+
       <div class="pull-right">
         <a id="event_edit" href="#eventEditFormModal" data-toggle="modal" class="btn btn-primary">Event bearbeiten</a>
         {{>rsvpWidget}}
@@ -12,8 +13,8 @@
       <h1>{{title}}</h1>
 			<p>{{description}}</p>
 			<p>WANN: {{when}}</p>
-			<p>WO: {{where}}</p>
-			<p>TWITTER: {{hashtag}}</p>
+			<p>WO: <a href="http://maps.google.com/maps?daddr={{where}}" target="_blank">{{where}}</a></p>
+			<p>TWITTER: <a href="https://twitter.com/search?q=%23{{hashtag}}" target="_blank">"#{{hashtag}}"</a></p>
 			<p>GÄSTE: {{#if rsvps}}
 				{{#each rsvps}}{{this.profile.name}}, {{/each}}
 				{{else}} Noch keine!
@@ -25,6 +26,7 @@
 				{{else}} Privat
 				{{/if}}
 			</p>
+
 		{{/with}}
 	</div>
 </template>
@@ -110,21 +112,23 @@
 </template>
 
 <template name="eventInviteForm">
-  <div>
-    <form>
-      <fieldset>
-        <legend>Einladungen</legend>
-        <input type="text" id="inputInvitees" placeholder="Emailadressen eintragen…">
-        <span class="help-block">Emailadressen mit Komma trennen.</span>
-        <button class="btn btn-primary save">Einladungen versenden</button>
-      </fieldset>
-    </form>
-    <ul>
-      {{#each invitations}}
-      <li>{{this}} <i id="{{this}}" class="icon-remove"></i></li>
-      {{/each}}
-    </ul>
-  </div>
+  {{#if canInvite}}
+    <div>
+      <form id="inviteForm">
+        <fieldset>
+          <legend>Einladungen</legend>
+          <input type="text" id="inputInvitees" placeholder="Emailadressen eintragen…">
+          <span class="help-block">Emailadressen mit Komma trennen.</span>
+          <button class="btn btn-primary save">Einladungen versenden</button>
+        </fieldset>
+      </form>
+      <ul>
+        {{#each invitations}}
+        <li>{{this}} <i id="{{this}}" class="icon-remove pull-right"></i></li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
 </template>
 
 <template name="rsvpWidget">

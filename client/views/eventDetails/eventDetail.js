@@ -7,6 +7,7 @@ Template.eventDetails.event = function() {
   return Session.get('event');
 };
 
+
 Template.event_edit_form.selectedEvent = function() {
   return Session.get('event');
 };
@@ -14,8 +15,8 @@ Template.event_edit_form.selectedEvent = function() {
 Template.rsvpWidget.attending = function() {
   var selectedEvent = Session.get('event');
   var attending = false;
-  _.each(selectedEvent.rsvps, function(rsvp){
-    if(rsvp._id === Meteor.user()._id) {
+  _.each(selectedEvent.rsvps, function(rsvp) {
+    if (rsvp._id === Meteor.user()._id) {
       attending = true;
     }
   });
@@ -23,18 +24,52 @@ Template.rsvpWidget.attending = function() {
 };
 
 Template.rsvpWidget.events({
-  'click #attend': function (){
+  'click #attend': function() {
     Meteor.call('attend', Session.get('event')._id);
   },
-  'click #unattend': function (){
+  'click #unattend': function() {
     Meteor.call('unattend', Session.get('event')._id);
   }
 });
 
+Template.eventInviteForm.canInvite = function() {
+  var event = Session.get('event');
+  console.log(event.public);
+  return !event.public && Meteor.userId() === event.owner._id;
+};
+
+Template.eventInviteForm.invitations = function() {
+  return Session.get('event').invited;
+};
+
 Template.eventInviteForm.events({
-  'click, submit .save': function(event, template){
+  'submit': function(event, template) {
     event.preventDefault();
-    console.log(template.find('#inputInvitees').value);
+    var inviteesInput = template.find('#inputInvitees').value;
+    var inviteesInputArray = inviteesInput.split(',');
+    var inviteesOutputArray = [];
+
+    _.each(inviteesInputArray, function(invitee) {
+      // trim whitespace from emails
+      var email = $.trim(invitee);
+      // push emails only if valid.
+      if (!(email === '' ||
+        email.indexOf('@') == -1 ||
+        email.indexOf('.') == -1)) {
+        inviteesOutputArray.push($.trim(invitee));
+      }
+    });
+    console.log(inviteesOutputArray);
+    template.find('#inviteForm').reset();
+    _.each(inviteesOutputArray, function(email) {
+      console.log(email);
+      Meteor.call('invite', Session.get('event')._id, Meteor.userId(), email);
+    });
+  },
+  'click .icon-remove': function(event, template) {
+    var invitee = event.toElement.id;
+    Meteor.call('uninvite',
+      Session.get('event')._id, Meteor.userId(), invitee);
   }
 });
 
@@ -82,7 +117,10 @@ Template.gmaps.rendered = function() {
    *
    * @param  {Object} result Geocoder result object.
    * @param  {String} status Return status code from Geocoding.
-   */function(result, status) {
+   */
+
+
+  function(result, status) {
     loc = result[0].geometry.location;
     mapOptions = {
       zoom: 16,
