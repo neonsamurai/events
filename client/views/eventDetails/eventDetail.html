@@ -1,16 +1,20 @@
 <template name="eventDetails">
 	{{>event_edit_form}}
 	<div class="container">
-		<a id="event_edit" href="#eventEditFormModal" data-toggle="modal" class="btn btn-primary">Event bearbeiten</a>
-    {{>rsvpWidget}}
 		{{#with event}}
-			<p>{{_id}}</p>
-			<h1>{{title}}</h1>
 			{{>gmaps}}
+
+      <div class="pull-right">
+        <a id="event_edit" href="#eventEditFormModal" data-toggle="modal" class="btn btn-primary">Event bearbeiten</a>
+        {{>rsvpWidget}}
+        <hr />
+        {{>eventInviteForm}}
+      </div>
+      <h1>{{title}}</h1>
 			<p>{{description}}</p>
 			<p>WANN: {{when}}</p>
-			<p>WO: {{where}}</p>
-			<p>TWITTER: {{hashtag}}</p>
+			<p>WO: <a href="http://maps.google.com/maps?daddr={{where}}" target="_blank">{{where}}</a></p>
+			<p>TWITTER: <a href="https://twitter.com/search?q=%23{{hashtag}}" target="_blank">"#{{hashtag}}"</a></p>
 			<p>GÄSTE: {{#if rsvps}}
 				{{#each rsvps}}{{this.profile.name}}, {{/each}}
 				{{else}} Noch keine!
@@ -22,6 +26,7 @@
 				{{else}} Privat
 				{{/if}}
 			</p>
+
 		{{/with}}
 	</div>
 </template>
@@ -106,16 +111,36 @@
   {{/with}}
 </template>
 
-<template name="rsvpWidget">
-  {{#if attending}}
-  <div>
-    <div class="alert alert-success">Du bist dabei!</div>
-    <button id="unattend" class="btn btn-block btn-large btn-danger">Absagen</button>
-  </div>
-  {{else}}
-  <div>
-    <div class="alert alert-warn">Du bist nicht dabei. Teilnehmen?</div>
-    <button id="attend" class="btn btn-block btn-large btn-primary">Teilnehmen</button>
-  </div>
+<template name="eventInviteForm">
+  {{#if canInvite}}
+    <div>
+      <form id="inviteForm">
+        <fieldset>
+          <legend>Einladungen</legend>
+          <input type="text" id="inputInvitees" placeholder="Emailadressen eintragen…">
+          <span class="help-block">Emailadressen mit Komma trennen.</span>
+          <button class="btn btn-primary save">Einladungen versenden</button>
+        </fieldset>
+      </form>
+      <ul>
+        {{#each invitations}}
+        <li>{{this}} <i id="{{this}}" class="icon-remove pull-right"></i></li>
+        {{/each}}
+      </ul>
+    </div>
   {{/if}}
+</template>
+
+<template name="rsvpWidget">
+
+  <div>
+    <h3>Teilnahme</h3>
+    {{#if attending}}
+      <div class="alert alert-success">Du bist dabei!</div>
+      <button id="unattend" class="btn btn-block btn-large btn-danger">Absagen</button>
+    {{else}}
+      <div class="alert alert-warn">Du bist nicht dabei...</div>
+      <button id="attend" class="btn btn-block btn-large btn-primary">Teilnehmen</button>
+    {{/if}}
+  </div>
 </template>
