@@ -89,3 +89,40 @@ Template.event_create_form.rendered = function() {
 // ---------------------------------------------------------------------------
 
 
+Template.smallMap.rendered = function() {
+  var event = this.data;
+  var geocoder = new google.maps.Geocoder();
+  var loc;
+  var mapOptions;
+  var map;
+  geocoder.geocode({
+    address: event.where
+  },
+  /**
+   * Geocoder callback to invoke map configuration. See
+   * http://goo.gl/rTLmJ for details
+   *
+   * @param  {Object} result Geocoder result object.
+   * @param  {String} status Return status code from Geocoding.
+   */
+
+
+  function(result, status) {
+    loc = result[0].geometry.location;
+    mapOptions = {
+      disableDefaultUI: true,
+      draggable: false,
+      zoom: 16,
+      center: new google.maps.LatLng(loc.lat(), loc.lng()),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(
+      document.getElementById(event._id),
+      mapOptions);
+    marker = new google.maps.Marker({
+      position: mapOptions.center,
+      map: map,
+      title: event.title
+    });
+  });
+};
