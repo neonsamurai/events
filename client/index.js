@@ -14,6 +14,13 @@ Template.eventsList.eventList = function() {
 // --- end template 'eventsList' ---------------------------------------------
 // ---------------------------------------------------------------------------
 
+Template.eventsList.eventIsVisible = function(eventId) {
+  var event = Events.findOne(eventId);
+  var email = Meteor.user().services.google.email ||
+  Meteor.user().services.facebook.email || Meteor.user().emails[0].address;
+  return event.public || event.owner == Meteor.userId() ||
+  _.contains(event.invited, email);
+};
 
 
 /**
