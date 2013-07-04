@@ -8,7 +8,6 @@ insecure
 preserve-inputs
 accounts-base
 accounts-ui
-accounts-facebook
 accounts-google
 spiderable
 jquery

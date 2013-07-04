@@ -4,11 +4,40 @@
  */
 
 /**
- * Gets all Event objects for display in the list view.
+ * Gets all valid Event objects for display in the list view.
+ * This means all events where:
+ *   - the event is public
+ *   OR
+ *   - the user is the event's owner
+ *   OR
+ *   - the user is on the invite list
  * @return {Array} Array of Event objects
  */
 Template.eventsList.eventList = function() {
-  return Events.find().fetch();
+  var user = Meteor.user();
+  var email;
+  if (user) {
+    email = user.emails && user.emails[0].address ||
+      user.services.google.email || user.services.facebook.email;
+    return Events.find({
+      $or: [{
+          public: true
+        }, {
+          "owner._id": user._id
+        }, {
+          invited: {
+            $in: [email]
+          }
+        }
+      ]
+    }).fetch();
+  } else {
+    return Events.find({
+      public: true
+    });
+  }
+
+
 };
 
 // --- end template 'eventsList' ---------------------------------------------
@@ -17,9 +46,9 @@ Template.eventsList.eventList = function() {
 Template.eventsList.eventIsVisible = function(eventId) {
   var event = Events.findOne(eventId);
   var email = Meteor.user().services.google.email ||
-  Meteor.user().services.facebook.email || Meteor.user().emails[0].address;
+    Meteor.user().services.facebook.email || Meteor.user().emails[0].address;
   return event.public || event.owner == Meteor.userId() ||
-  _.contains(event.invited, email);
+    _.contains(event.invited, email);
 };
 
 
