@@ -97,7 +97,7 @@ Meteor.methods({
       description: options.description,
       where: options.where,
       when: options.when,
-      public: options.publicToggle,
+      public: options.public,
       invited: [],
       rsvps: [Meteor.user()]
     });
