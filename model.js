@@ -36,7 +36,7 @@ Events.allow({
     if (userId !== event.owner._id) {
       return false; // kein Besitzer
     }
-
+    // List of allowed fields to modify
     var allowed = [
         "title",
         "description",
@@ -45,7 +45,7 @@ Events.allow({
         "when",
         "public"
     ];
-
+    // Check for disallowed fields
     if (_.difference(fields, allowed).length) {
       return false;
     }
@@ -53,8 +53,8 @@ Events.allow({
   },
   /**
    * Users can only delete their own events.
-   * @param  {String} userId ID of logged in user.
-   * @param  {Object} event  Event object.
+   * @param  {String} userId  ID of logged in user.
+   * @param  {Object} event   Event object.
    * @return {Boolean}        Wheter or not to allow the delete.
    */
   remove: function(userId, event) {
@@ -69,17 +69,28 @@ Events.allow({
 Meteor.methods({
   /**
    * Provides validation and creates an event object.
-   * @param  {Object} options Form data.
-   * @return {Events.insert()}         Preconfigured Events.insert() method.
+   * @param  {Object} options   Form data.
+   * @return {Events.insert()}  Preconfigured Events.insert() method.
    */
   createEvent: function(options) {
     options = options || {};
     console.log(options);
-    if (!(typeof options.title === "string" && options.title.length &&
+    // Validate the Event object.
+    // Is a field missing?
+    if (!(
+      // Is there a title?
+      typeof options.title === "string" && 
+          options.title.length &&
+      // Is there a description?
       typeof options.description === "string" &&
-      options.description.length &&
-      typeof options.where === "string" && options.where.length &&
-      typeof options.when === "string" && options.when.length))
+        options.description.length &&
+      // Is there a location?
+      typeof options.where === "string" && 
+        options.where.length &&
+      // Is there a date?
+      typeof options.when === "string" && 
+        options.when.length
+    ))
       throw new Meteor.Error(400, "Required parameter missing");
     if (options.title.length > 100)
       throw new Meteor.Error(413, "Title too long");

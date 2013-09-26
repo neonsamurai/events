@@ -2,7 +2,7 @@
   "meteor": {
     "git": "https://github.com/meteor/meteor.git",
     "branch": "master",
-    "commit": "5d736d4bf0448c7db1f9b47124dfafc34a9631bb"
+    "commit": "bb6c88ca9e3409ce4d50b796123c62cfb8fc71fd"
   },
   "dependencies": {
     "basePackages": {
@@ -12,18 +12,18 @@
     "packages": {
       "mini-pages": {
         "git": "https://github.com/cmather/meteor-mini-pages.git",
-        "tag": "v0.3.1",
-        "commit": "d218140d37b0dbec975880755c2035ae9e022936"
+        "tag": "v0.3.2",
+        "commit": "4d885ffb6d0108ee2e47a13a6296c98a2f7b5059"
       },
       "font-awesome": {
         "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
-        "tag": "v0.1.6",
-        "commit": "f0f7bde5b60f3ceae69e11fa545bdbf8a8cf2d03"
+        "tag": "v3.2.1",
+        "commit": "38bdfff72dfb8857b272f9a9b056045d6a015489"
       },
       "HTML5-History-API": {
         "git": "https://github.com/tmeasday/meteor-HTML5-History-API.git",
-        "tag": "v0.1.2",
-        "commit": "72333bfa71ae1ca75243085e83200eef40818088"
+        "tag": "v4.0.0",
+        "commit": "dc4965f1424cfca625ec3fbea17eace03f8e32c5"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",

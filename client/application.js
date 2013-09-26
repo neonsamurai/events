@@ -19,6 +19,8 @@ setEvent = function(context) {
  */
 Meteor.pages({
   '/': 'eventsList',
+  '/about': 'aboutPage',
+  '/contact': 'contactPage',
   '/events/:event_id': {
     to: 'eventDetails',
     before: setEvent
