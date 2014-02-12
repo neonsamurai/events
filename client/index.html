@@ -44,13 +44,13 @@
             <ul class="nav">
               {{#if loggedIn}}
               <li>
-                <a 
-                  id="event_create" 
-                  href="#eventCreateFormModal" 
+                <a
+                  id="event_create"
+                  href="#eventCreateFormModal"
                   data-toggle="modal">
                   <span>
                     <i class="icon-plus-sign"></i>
-                    <span 
+                    <span
                       class="hidden-phone visible-tablet visible-desktop">
                       Event erstellen
                     </span>
@@ -61,7 +61,7 @@
               <li>
                 <a id="impressum_show" href="#about">
                   <span>
-                    <i class="icon-info-sign"></i> 
+                    <i class="icon-info-sign"></i>
                     <span class="hidden-phone visible-tablet visible-desktop">
                       Impressum
                     </span>
@@ -71,7 +71,7 @@
               <li>
                 <a id="contact_show" href="#contact">
                   <span>
-                    <i class="icon-envelope"></i> 
+                    <i class="icon-envelope"></i>
                     <span class="hidden-phone visible-tablet visible-desktop">
                       Kontakt
                     </span>
@@ -94,19 +94,19 @@
 
 <template name="event_create_form">
   <!-- Modal -->
-  <div 
-    id="eventCreateFormModal" 
-    class="modal hide fade" 
-    tabindex="-1" 
-    role="dialog" 
-    aria-labelledby="myModalLabel" 
+  <div
+    id="eventCreateFormModal"
+    class="modal hide fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
     aria-hidden="true"
   >
     <div class="modal-header">
-      <button 
-        type="button" 
-        class="close" 
-        data-dismiss="modal" 
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
         aria-hidden="true">
         ×
       </button>
@@ -117,30 +117,30 @@
         <div class="control-group">
           <label class="control-label" for="inputTitle">Titel</label>
           <div class="controls">
-            <input 
-              class="input-block-level" 
-              type="text" 
-              id="inputTitle" 
+            <input
+              class="input-block-level"
+              type="text"
+              id="inputTitle"
               placeholder="Titel der Veranstaltung..." />
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="inputDateWhen">Wann</label>
           <div class="controls">
-            <input 
-              id="inputDateWhen" 
-              type="text" readonly 
-              class="input-block-level" 
+            <input
+              id="inputDateWhen"
+              type="text" readonly
+              class="input-block-level"
               placeholder="TT/MM/YYYY HH:MM">
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="inputHashtag">Hashtag</label>
           <div class="controls">
-            <input 
-              class="input-block-level" 
-              type="text" 
-              id="inputHashtag" 
+            <input
+              class="input-block-level"
+              type="text"
+              id="inputHashtag"
               placeholder="#..." />
           </div>
         </div>
@@ -149,10 +149,10 @@
             Beschreibung
           </label>
           <div class="controls">
-            <textarea 
-              class="input-block-level" 
-              rows="5" 
-              id="inputDescription" 
+            <textarea
+              class="input-block-level"
+              rows="5"
+              id="inputDescription"
               placeholder="Ausführliche Beschreibung der Veranstaltung...">
             </textarea>
           </div>
@@ -160,10 +160,10 @@
         <div class="control-group">
           <label class="control-label" for="inputAdress">Adresse</label>
           <div class="controls">
-            <textarea 
-              class="input-block-level" 
-              rows="5" 
-              id="inputAdress" 
+            <textarea
+              class="input-block-level"
+              rows="5"
+              id="inputAdress"
               placeholder="Ort der Veranstaltung...">
             </textarea>
           </div>
@@ -171,9 +171,9 @@
         <div class="control-group">
           <div class="controls">
             <label class="checkbox">
-              <input 
-                id="inputPublicToggle" 
-                type="checkbox"> 
+              <input
+                id="inputPublicToggle"
+                type="checkbox">
             Öffentliche Veranstaltung?
             </label>
           </div>
@@ -181,14 +181,14 @@
       </form>
     </div>
     <div class="modal-footer">
-      <button 
-        class="btn" 
-        data-dismiss="modal" 
+      <button
+        class="btn"
+        data-dismiss="modal"
         aria-hidden="true">
         Abbrechen
       </button>
-      <button 
-        data-dismiss="modal" 
+      <button
+        data-dismiss="modal"
         class="btn btn-primary save">
         Event erstellen
       </button>
@@ -212,6 +212,7 @@
 
   <!-- Parties / Events go here -->
   <div class="container">
+    {{#if currentUser}}
     <ul class="thumbnails">
       {{#each eventList}}
       <li class="span4">
@@ -226,6 +227,7 @@
       </li>
       {{/each}}
     </ul>
+    {{/if}}
   </div>
 </template>
 
